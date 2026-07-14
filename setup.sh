@@ -56,26 +56,12 @@ CASKS=(
 info "Installing casks: ${CASKS[*]}"
 brew install --cask "${CASKS[@]}"
 
-# ── firstmate ────────────────────────────────────────────────────────────────
+# ── firstmate (kunchenguid/firstmate) ────────────────────────────────────────
 if [ ! -d "$HOME/firstmate" ]; then
-  info "Cloning firstmate into ~/firstmate"
+  info "Cloning firstmate (github.com/kunchenguid/firstmate) into ~/firstmate"
   git clone https://github.com/kunchenguid/firstmate "$HOME/firstmate" || warn "clone failed (need gh auth first?)"
 else
   ok "~/firstmate already exists"
-fi
-
-# ── yolo shell function ──────────────────────────────────────────────────────
-if ! grep -q 'yolo ()' "$HOME/.zshrc" 2>/dev/null; then
-  info "Adding the 'yolo' shortcut to ~/.zshrc"
-  cat >> "$HOME/.zshrc" <<'YOLO'
-
-yolo () {
-	unset CLAUDECODE CLAUDE_CODE_ENTRYPOINT
-	claude --dangerously-skip-permissions --fallback-model sonnet "$@"
-}
-YOLO
-else
-  ok "'yolo' already in ~/.zshrc"
 fi
 
 # ── Manual follow-ups ────────────────────────────────────────────────────────
@@ -90,7 +76,6 @@ cat <<'NEXT'
                     sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
                     sudo xcodebuild -license accept && xcodebuild -runFirstLaunch
 4. Herd:          open Herd once from Applications to finish onboarding (needs admin).
-5. Reload shell:  source ~/.zshrc      (activates `yolo`)
 
 Then:  cd ~/firstmate && claude
 ────────────────────────────────────────────────────────────

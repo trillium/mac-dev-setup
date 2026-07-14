@@ -1,8 +1,8 @@
 # Mac Dev Setup
 
-Copy-paste setup for a fresh Mac: Claude Code + GitHub CLI + iOS build tools + Laravel Herd + firstmate.
+Copy-paste setup for a **brand-new Mac** — assumes nothing is installed yet. Gets you Claude Code, GitHub CLI, iOS build tools, Laravel Herd, and [firstmate](https://github.com/kunchenguid/firstmate).
 
-Open **Terminal** (press `⌘ + Space`, type `Terminal`, hit Enter). Run each command below in order.
+Open **Terminal** (press `⌘ + Space`, type `Terminal`, hit Enter). Run each command below in order, top to bottom.
 
 > **In a hurry?** One command installs Homebrew + all the brew-based tools automatically, then tells you the few manual steps left (GitHub login, Xcode, Herd):
 > ```bash
@@ -67,35 +67,14 @@ Then open **Herd** once from Applications so it can finish setup (needs admin pe
 
 ## 6. firstmate (agent crew)
 
+firstmate is [**kunchenguid/firstmate**](https://github.com/kunchenguid/firstmate) — an agent distro you run with Claude Code (or another harness). It's a git clone, not a package install. Full docs: its [README](https://github.com/kunchenguid/firstmate#readme).
+
 ```bash
 git clone https://github.com/kunchenguid/firstmate && cd firstmate
 claude
 ```
 
-Inside firstmate, its `AGENTS.md` takes over and offers to install anything still missing.
-
-## 7. The `yolo` shortcut
-
-A shell function that launches Claude Code with permission prompts skipped (auto-approves tool calls) and a Sonnet fallback. Add it once and use `yolo` instead of `claude`.
-
-```bash
-cat >> ~/.zshrc <<'YOLO'
-
-yolo () {
-	unset CLAUDECODE CLAUDE_CODE_ENTRYPOINT
-	claude --dangerously-skip-permissions --fallback-model sonnet "$@"
-}
-YOLO
-source ~/.zshrc
-```
-
-Then just run:
-
-```bash
-yolo
-```
-
-> ⚠️ `--dangerously-skip-permissions` means the agent runs commands without asking. Only use it in a directory/project you trust.
+Inside firstmate, its `AGENTS.md` takes over and offers to install anything still missing. (Prereqs — `gh auth login` and `tmux` — are covered in steps 2–3 above.)
 
 ---
 
