@@ -50,6 +50,7 @@ brew install oven-sh/bun/bun
 # ── Casks ────────────────────────────────────────────────────────────────────
 CASKS=(
   iterm2                        # terminal
+  # wezterm                     # alternative to iterm2 — GPU-accelerated, Lua-configurable; uncomment to use instead
   visual-studio-code            # editor
   herd                          # Laravel/PHP dev environment (bundles php/composer/laravel/node)
 )
