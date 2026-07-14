@@ -4,8 +4,8 @@
 #   curl -fsSL https://raw.githubusercontent.com/trillium/mac-dev-setup/main/setup.sh | bash
 #
 # Installs the non-interactive pieces (Homebrew + CLI tools + casks). The steps
-# that need a human — GitHub login, Apple ID for Xcode, Herd onboarding — are
-# printed as reminders at the end rather than half-automated.
+# that need a human — GitHub login, Apple ID for Xcode — are printed as
+# reminders at the end rather than half-automated.
 
 set -uo pipefail
 
@@ -36,7 +36,8 @@ fi
 FORMULAE=(
   gh tmux                       # GitHub CLI + terminal multiplexer (firstmate needs both)
   node                          # Node runtime (Claude Code & many CLIs expect it)
-  ripgrep fd jq                 # fast search / find / JSON — agents lean on these
+  ripgrep fd jq                 # fast search / find / JSON — agents lean on these (jq also parses herdr's JSON)
+  herdr                         # agent-native terminal multiplexer (runs alongside Claude Code & firstmate)
   starship git-delta            # prompt + pretty git diffs
   xcbeautify swiftlint xcodegen ios-deploy fastlane   # iOS tooling
 )
@@ -52,7 +53,6 @@ CASKS=(
   iterm2                        # terminal
   # wezterm                     # alternative to iterm2 — GPU-accelerated, Lua-configurable; uncomment to use instead
   visual-studio-code            # editor
-  herd                          # Laravel/PHP dev environment (bundles php/composer/laravel/node)
 )
 info "Installing casks: ${CASKS[*]}"
 brew install --cask "${CASKS[@]}"
@@ -90,8 +90,7 @@ cat <<'NEXT'
 3. Full Xcode:    install "Xcode" from the App Store (~7GB), open it once, then:
                     sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
                     sudo xcodebuild -license accept && xcodebuild -runFirstLaunch
-4. Herd:          open Herd once from Applications to finish onboarding (needs admin).
-5. Reload shell:  source ~/.zshrc      (activates `yolo`)
+4. Reload shell:  source ~/.zshrc      (activates `yolo`)
 
 Then:  cd ~/firstmate && claude
 ────────────────────────────────────────────────────────────

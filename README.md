@@ -1,10 +1,10 @@
 # Mac Dev Setup
 
-Copy-paste setup for a fresh Mac: Claude Code + GitHub CLI + iOS build tools + Laravel Herd + firstmate.
+Copy-paste setup for a fresh Mac: Claude Code + GitHub CLI + iOS build tools + herdr + firstmate.
 
 Open **Terminal** (press `⌘ + Space`, type `Terminal`, hit Enter). Run each command below in order.
 
-> **In a hurry?** One command installs Homebrew + all the brew-based tools automatically, then tells you the few manual steps left (GitHub login, Xcode, Herd):
+> **In a hurry?** One command installs Homebrew + all the brew-based tools automatically, then tells you the few manual steps left (GitHub login, Xcode):
 > ```bash
 > curl -fsSL https://raw.githubusercontent.com/trillium/mac-dev-setup/main/setup.sh | bash
 > ```
@@ -57,13 +57,15 @@ sudo xcodebuild -license accept
 xcodebuild -runFirstLaunch
 ```
 
-## 5. Laravel Herd (PHP dev environment)
+## 5. herdr (agent terminal multiplexer)
+
+An agent-native terminal multiplexer that runs alongside Claude Code and firstmate. It's a Homebrew **formula** (not a cask); `jq` parses its JSON output.
 
 ```bash
-brew install --cask herd
+brew install herdr jq
 ```
 
-Then open **Herd** once from Applications so it can finish setup (needs admin permission for its background service).
+No onboarding step needed — herdr starts its own session server on first use.
 
 ## 6. firstmate (agent crew)
 
@@ -121,8 +123,8 @@ brew install ripgrep fd jq
 ```bash
 brew install --cask iterm2                 # solid default terminal (or --cask ghostty for a modern GPU-native one)
 brew install --cask wezterm                # GPU-accelerated, Lua-configurable terminal — another solid alternative to iTerm2
-brew install starship                      # language-aware prompt (git/PHP/Swift context)
-brew install --cask visual-studio-code     # editor for the PHP/Laravel side + reading agent diffs
+brew install starship                      # language-aware prompt (git/Swift context)
+brew install --cask visual-studio-code     # editor + reading agent diffs
 ```
 
 ### Git ergonomics
@@ -144,14 +146,6 @@ brew install ios-deploy                     # install/debug apps on a physical i
 brew install fastlane                       # automate builds/signing/TestFlight (add when shipping to the store)
 ```
 
-### PHP / Laravel
-
-```bash
-composer global require laravel/installer   # `laravel new` scaffolder — Composer comes bundled WITH Herd
-```
-
-> **Don't double-install:** Herd already ships `php`, `composer`, `laravel`, `node`, `npm`, and `nvm`. Don't `brew install composer` or add a second global Laravel installer — it'll shadow Herd's and cause confusion.
-
 ### Optional
 
 ```bash
@@ -166,14 +160,14 @@ brew install cocoapods                      # only if a project uses Pods (Swift
 
 Paste this into Claude Code and it'll run the whole thing:
 
-> Please set up this Mac as a development environment. Do each step, verify it worked before moving on, and stop and tell me if anything needs my input (password, browser login, GUI install): (1) Install Homebrew if not present. (2) `brew install gh tmux`. (3) `gh auth login` — walk me through the browser sign-in. (4) `xcode-select --install`. (5) Check for full Xcode; if missing, tell me to install it from the App Store, then run `sudo xcodebuild -license accept && xcodebuild -runFirstLaunch`. (6) `brew install --cask herd`, then tell me to open Herd once. (7) Clone https://github.com/kunchenguid/firstmate and cd into it. Confirm versions at the end (`gh --version`, `tmux -V`, `xcodebuild -version`, `php --version`, `herd --version`) and report anything that failed.
+> Please set up this Mac as a development environment. Do each step, verify it worked before moving on, and stop and tell me if anything needs my input (password, browser login, GUI install): (1) Install Homebrew if not present. (2) `brew install gh tmux`. (3) `gh auth login` — walk me through the browser sign-in. (4) `xcode-select --install`. (5) Check for full Xcode; if missing, tell me to install it from the App Store, then run `sudo xcodebuild -license accept && xcodebuild -runFirstLaunch`. (6) `brew install herdr jq`. (7) Clone https://github.com/kunchenguid/firstmate and cd into it. Confirm versions at the end (`gh --version`, `tmux -V`, `xcodebuild -version`, `herdr --version`) and report anything that failed.
 
 ---
 
 ## Verify everything
 
 ```bash
-gh --version && tmux -V && xcodebuild -version && php --version && herd --version
+gh --version && tmux -V && xcodebuild -version && herdr --version
 ```
 
 ---
