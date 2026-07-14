@@ -4,6 +4,12 @@ Copy-paste setup for a fresh Mac: Claude Code + GitHub CLI + iOS build tools + L
 
 Open **Terminal** (press `⌘ + Space`, type `Terminal`, hit Enter). Run each command below in order.
 
+> **In a hurry?** One command installs Homebrew + all the brew-based tools automatically, then tells you the few manual steps left (GitHub login, Xcode, Herd):
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/trillium/mac-dev-setup/main/setup.sh | bash
+> ```
+> Prefer to do it by hand / understand each piece? Follow the steps below instead.
+
 ---
 
 ## 1. Claude Code
