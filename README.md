@@ -57,6 +57,29 @@ claude
 
 Inside firstmate, its `AGENTS.md` takes over and offers to install anything still missing.
 
+## 7. The `yolo` shortcut
+
+A shell function that launches Claude Code with permission prompts skipped (auto-approves tool calls) and a Sonnet fallback. Add it once and use `yolo` instead of `claude`.
+
+```bash
+cat >> ~/.zshrc <<'YOLO'
+
+yolo () {
+	unset CLAUDECODE CLAUDE_CODE_ENTRYPOINT
+	claude --dangerously-skip-permissions --fallback-model sonnet "$@"
+}
+YOLO
+source ~/.zshrc
+```
+
+Then just run:
+
+```bash
+yolo
+```
+
+> ⚠️ `--dangerously-skip-permissions` means the agent runs commands without asking. Only use it in a directory/project you trust.
+
 ---
 
 ## Or: let the agent do it
