@@ -120,6 +120,7 @@ brew install ripgrep fd jq
 
 ```bash
 brew install --cask iterm2                 # solid default terminal (or --cask ghostty for a modern GPU-native one)
+brew install --cask wezterm                # GPU-accelerated, Lua-configurable terminal — another solid alternative to iTerm2
 brew install starship                      # language-aware prompt (git/PHP/Swift context)
 brew install --cask visual-studio-code     # editor for the PHP/Laravel side + reading agent diffs
 ```
